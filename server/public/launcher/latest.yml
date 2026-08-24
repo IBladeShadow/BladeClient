@@ -1,0 +1,14 @@
+version: 0.2.8-Beta-2
+files:
+  - url: BladeClient Launcher Web Setup 0.2.8-Beta-2.exe
+    sha512: ixMCwTvXi9zRuJKyq8903WjMzdvxWqC766rNL6lMWyIMIEj4XaFIVPNLW/btdbGnrSRwKCNXUzOjoX09w9sJHQ==
+path: BladeClient Launcher Web Setup 0.2.8-Beta-2.exe
+sha512: ixMCwTvXi9zRuJKyq8903WjMzdvxWqC766rNL6lMWyIMIEj4XaFIVPNLW/btdbGnrSRwKCNXUzOjoX09w9sJHQ==
+packages:
+  x64:
+    size: 85780216
+    sha512: GBe75rxn24CRVYJBnj0492NQd/cb0ooCKH/JEyAqi0tgsAiF/OapwiKElZXL8Y52bWz+5Nhheug1n/jmIH9jHQ==
+    blockMapSize: 90240
+    path: bladeclient-launcher-0.2.8-Beta-2-x64.nsis.7z
+    file: bladeclient-launcher-0.2.8-Beta-2-x64.nsis.7z
+releaseDate: '2026-02-28T08:00:19.313Z'

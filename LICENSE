@@ -1,0 +1,47 @@
+BladeClient License
+(based on the MIT License, with Non-Commercial restrictions)
+
+Copyright (c) 2026 IBladeShadow
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute and create forks of the
+Software, subject to the following conditions:
+
+1. NOTICE RETENTION: The above copyright notice and this permission notice
+   shall be included in all copies or substantial portions of the Software,
+   and shall not be removed or altered.
+
+2. NON-COMMERCIAL ONLY: The Software, in whole or in part, may NOT be sold,
+   rented, leased, or distributed for a fee. Selling the Software, any
+   derivative of it, or access to it is strictly prohibited. Non-commercial
+   distribution (free of charge) is permitted.
+
+3. MODIFICATIONS: Modified files must carry prominent notices stating that
+   you changed them. Modified versions remain fully subject to this license.
+
+4. FORKS AND DERIVATIVE WORKS: Forking and building upon the Software is
+   permitted and encouraged, provided that:
+     a) all forks and derivatives credit the original author (IBladeShadow);
+     b) this license is included unchanged;
+     c) the original name and branding are not used to imply endorsement of
+        the derivative by the original author.
+
+5. TRADEMARKS: This license does not grant any rights to use the names,
+   logos, or trademarks of BladeClient / IBladeShadow, except for fair and
+   accurate attribution of origin.
+
+6. PATENTS: To the extent applicable, the author grants a perpetual,
+   worldwide, royalty-free patent license to make, use and distribute the
+   Software, solely for non-commercial purposes as defined above.
+
+7. WARRANTY DISCLAIMER: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY
+   OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+   WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+   NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDER BE
+   LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+   CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+   THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Copyright (c) 2026 IBladeShadow. All rights reserved.

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "bladeclient",
+  "version": "${version}",
+  "name": "BladeClient",
+  "description": "Blade Client for modern PvP.",
+  "authors": ["IBladeShadow"],
+  "contact": {},
+  "license": "LicenseRef-BladeClient-NC",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "ir.modernshadow.bladeclient.BladeClient"
+    ]
+  },
+  "mixins": [
+    "bladeclient.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "1.21.8",
+    "java": ">=21",
+    "fabric-api": "*",
+    "yet_another_config_lib_v3": "*",
+    "owo-lib": ">=0.12.23+1.21.8"
+  }
+}

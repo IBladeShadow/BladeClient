@@ -1,0 +1,152 @@
+plugins {
+    id 'fabric-loom' version '1.14-SNAPSHOT'
+    id 'maven-publish'
+    id 'java'
+}
+
+group = project.getProperty('maven_group')
+def buildNumber = project.findProperty('build_number') ?: '0000'
+version = "${project.getProperty('mod_version')}-Build${buildNumber}"
+
+ext {
+    mcVersion = project.minecraft_version
+    loaderVersion = project.loader_version
+    fabricApiVersion = project.fabric_version
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.fabricmc.net/' }
+    exclusiveContent {
+        forRepository {
+            maven { url = 'https://api.modrinth.com/maven' }
+        }
+        filter {
+            includeGroup 'maven.modrinth'
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven { url = 'https://cursemaven.com' }
+        }
+        filter {
+            includeGroup 'curse.maven'
+        }
+    }
+    maven {
+        url = 'https://maven.quiltmc.org/repository/release/'
+        content {
+            includeGroup 'org.quiltmc.parsers'
+        }
+    }
+    maven { url = 'https://maven.wispforest.io/releases/' }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.minecraft_version}+build.1:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "maven.modrinth:yacl:${project.yacl_version}"
+    modImplementation "org.quiltmc.parsers:gson:0.3.1"
+    modImplementation "org.quiltmc.parsers:json:0.3.1"
+    modImplementation "io.wispforest:owo-lib:0.12.23+1.21.8"
+    modRuntimeOnly "maven.modrinth:simple-voice-chat:${project.voicechat_version}"
+
+    // Performance + shaders alternatives to OptiFine (Fabric)
+    modRuntimeOnly "maven.modrinth:sodium:mc1.21.8-0.7.2-fabric"
+    modRuntimeOnly "maven.modrinth:iris:1.9.6+1.21.8-fabric"
+    modRuntimeOnly "maven.modrinth:lithium:mc1.21.8-0.18.1-fabric"
+    modRuntimeOnly "maven.modrinth:ferrite-core:8.0.0-fabric"
+    modRuntimeOnly "maven.modrinth:entityculling:1.9.1-1.21.8"
+    modRuntimeOnly "net.fabricmc:fabric-language-kotlin:1.13.5+kotlin.2.2.10"
+
+    // OptiFine cape support (from OptiFine servers)
+    modRuntimeOnly "curse.maven:capes-408481:6818768"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}
+
+def runModsDir = layout.projectDirectory.dir("run/mods").asFile
+
+tasks.register("extractEntityCullingLibs") {
+    group = "modding"
+    description = "Extracts EntityCulling jar-in-jar libraries into run/mods for dev runtime."
+    doLast {
+        def cfg = configurations.modRuntimeOnly
+        def art = cfg.resolvedConfiguration.resolvedArtifacts.find { it.name == "entityculling" }
+        if (art == null) {
+            return
+        }
+        def jar = art.file
+        if (jar == null || !jar.exists()) {
+            return
+        }
+        runModsDir.mkdirs()
+        // Remove old extracted libs
+        ["TRansition-", "TRender-"].each { prefix ->
+            runModsDir.listFiles()?.findAll { it.name.startsWith(prefix) && it.name.endsWith(".jar") }?.each { it.delete() }
+        }
+        copy {
+            from(zipTree(jar)) {
+                include "META-INF/jars/*.jar"
+            }
+            into(runModsDir)
+            eachFile { f -> f.path = f.name }
+            includeEmptyDirs = false
+        }
+    }
+}
+
+tasks.register("extractIrisLibs") {
+    group = "modding"
+    description = "Extracts Iris jar-in-jar libraries into run/mods for dev runtime."
+    doLast {
+        def cfg = configurations.modRuntimeOnly
+        def art = cfg.resolvedConfiguration.resolvedArtifacts.find { it.name == "iris" }
+        if (art == null) {
+            return
+        }
+        def jar = art.file
+        if (jar == null || !jar.exists()) {
+            return
+        }
+        runModsDir.mkdirs()
+        // Remove old extracted libs
+        ["glsl-transformer-", "jcpp-", "antlr4-runtime-"].each { prefix ->
+            runModsDir.listFiles()?.findAll { it.name.startsWith(prefix) && it.name.endsWith(".jar") }?.each { it.delete() }
+        }
+        copy {
+            from(zipTree(jar)) {
+                include "META-INF/jars/glsl-transformer-*.jar"
+                include "META-INF/jars/jcpp-*.jar"
+                include "META-INF/jars/antlr4-runtime-*.jar"
+            }
+            into(runModsDir)
+            eachFile { f -> f.path = f.name }
+            includeEmptyDirs = false
+        }
+    }
+}
+
+tasks.named("runClient") {
+    dependsOn("extractEntityCullingLibs", "extractIrisLibs")
+}
+
+
+processResources {
+    inputs.properties(version: project.version)
+    filesMatching("fabric.mod.json") {
+        expand(project.properties)
+    }
+}
+
+

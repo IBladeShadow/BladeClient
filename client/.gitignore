@@ -1,0 +1,43 @@
+# Gradle caches & outputs
+.gradle/
+build/
+out/
+
+# Build outputs
+bin/
+META-INF/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Minecraft runs & dev data
+run/
+mappings/
+local.properties
+
+# Local folders not needed to build or run
+/assets/
+/client/
+/BladeShader_V1/
+
+# Jars
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+# Secrets / local config overrides
+local.properties
