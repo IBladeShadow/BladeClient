@@ -1,0 +1,16 @@
+# Explicit language detection for GitHub Linguist
+*.vue  linguist-language=Vue
+*.js   linguist-language=JavaScript
+*.cjs  linguist-language=JavaScript
+*.mjs  linguist-language=JavaScript
+*.ts   linguist-language=TypeScript
+*.css  linguist-language=CSS
+*.html linguist-language=HTML
+*.java linguist-language=Java
+*.fsh  linguist-language=GLSL
+*.vsh  linguist-language=GLSL
+*.glsl linguist-language=GLSL
+
+# Bundled runtime artifacts (not part of the codebase)
+launcher/mods/*.jar linguist-vendored
+server/public/*     linguist-vendored
